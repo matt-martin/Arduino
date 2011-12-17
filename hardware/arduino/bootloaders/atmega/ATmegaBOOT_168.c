@@ -380,7 +380,7 @@ int main(void)
 	UBRR0H = (F_CPU/(BAUD_RATE*16L)-1) >> 8;
 #endif
 
-	UCSR0B = (1<<RXEN0) | (1<<TXEN0);
+	UCSR0B = (1<<RXEN0) | (1<<TXEN0) | (1<<UCSZ02);;
 	UCSR0C = (1<<UCSZ00) | (1<<UCSZ01);
 
 	/* Enable internal pull-up resistor on pin D0 (RX), in order

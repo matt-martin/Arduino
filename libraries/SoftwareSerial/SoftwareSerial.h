@@ -63,7 +63,7 @@ private:
   uint16_t _inverse_logic:1;
 
   // static data
-  static char _receive_buffer[_SS_MAX_RX_BUFF]; 
+  static uint16_t _receive_buffer[_SS_MAX_RX_BUFF]; 
   static volatile uint8_t _receive_buffer_tail;
   static volatile uint8_t _receive_buffer_head;
   static SoftwareSerial *active_object;
@@ -88,6 +88,7 @@ public:
   bool isListening() { return this == active_object; }
   bool overflow() { bool ret = _buffer_overflow; _buffer_overflow = false; return ret; }
   int peek();
+  size_t write_nine_bits(uint16_t two_bytes);
 
   virtual size_t write(uint8_t byte);
   virtual int read();

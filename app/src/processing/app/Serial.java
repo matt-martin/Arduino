@@ -269,7 +269,7 @@ public class Serial implements SerialPortEventListener {
 
 
   /**
-   * Returns a number between 0 and 255 for the next byte that's 
+   * Returns a number between 0 and 511 for the next byte that's 
    * waiting in the buffer. 
    * Returns -1 if there was no byte (although the user should
    * first check available() to see if things are ready to avoid this)
@@ -278,7 +278,7 @@ public class Serial implements SerialPortEventListener {
     if (bufferIndex == bufferLast) return -1;
 
     synchronized (buffer) {
-      int outgoing = buffer[bufferIndex++] & 0xff;
+      int outgoing = buffer[bufferIndex++] & 0x1ff;
       if (bufferIndex == bufferLast) {  // rewind
         bufferIndex = 0;
         bufferLast = 0;
@@ -455,7 +455,7 @@ public class Serial implements SerialPortEventListener {
    */
   public void write(int what) {  // will also cover char
     try {
-      output.write(what & 0xff);  // for good measure do the &
+      output.write(what & 0x1ff);  // for good measure do the &
       output.flush();   // hmm, not sure if a good idea
 
     } catch (Exception e) { // null pointer or serial port dead

@@ -471,7 +471,7 @@ size_t SoftwareSerial::write_nine_bits(uint16_t b)
   }
   else
   {
-    for (byte mask = 0x01; mask; mask <<= 1)
+    for (uint16_t mask=0x1, j=0; j < 9; mask <<= 1, j++)
     {
       if (b & mask) // choose bit
         tx_pin_write(HIGH); // send 1
